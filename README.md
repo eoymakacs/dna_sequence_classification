@@ -88,7 +88,44 @@ The script automatically:
 ## Results
 - Expected Test Accuracy: ~85–95%
 - Evaluation Metrics: Accuracy, Precision, Recall, F1-score
-
-Visualization:
+- Visualization:
   - Confusion Matrix
   - Training / Validation Accuracy over epochs
+
+---
+
+## Insights
+
+- CNNs can detect local motifs in DNA sequences, which is key for identifying promoter regions.
+- This pipeline can be extended to:
+  - Enhancer vs non-enhancer classification
+  - Gene family classification
+  - Mutation impact prediction
+ 
+---
+ 
+## 🔮 Next Steps
+
+- Experiment with **RNN architectures** (LSTM or GRU) to capture sequential dependencies in DNA sequences.  
+- Explore **k-mer embeddings** instead of one-hot encoding for richer sequence representation.  
+- Train and evaluate on **larger genomic datasets** from sources like:
+  - [NCBI GEO](https://www.ncbi.nlm.nih.gov/geo/)  
+  - [Kaggle Bioinformatics Datasets](https://www.kaggle.com/datasets?tags=13206-bioinformatics)  
+- Apply the pipeline to related bioinformatics problems, such as:
+  - Enhancer vs non-enhancer classification  
+  - Gene family prediction  
+  - Mutation effect prediction  
+- Optimize the CNN with **hyperparameter tuning** (filters, kernel sizes, dropout rates) to improve performance.  
+- Implement **model explainability techniques** (e.g., saliency maps) to visualize which DNA motifs the model is learning.
+
+---
+
+## 📚 References
+
+- [UCI Machine Learning Repository – Promoter Gene Sequences](https://archive.ics.uci.edu/ml/datasets/Molecular+Biology+(Promoter+Gene+Sequences))  
+- [scikit-learn: Label Encoding & Preprocessing](https://scikit-learn.org/stable/modules/preprocessing.html)  
+- [TensorFlow Keras Documentation](https://www.tensorflow.org/guide/keras)  
+- [1D Convolutional Neural Networks for Sequence Data](https://keras.io/api/layers/convolution_layers/convolution1d/)  
+- [Introduction to DNA Promoter Regions](https://www.ncbi.nlm.nih.gov/books/NBK21899/)
+
+
