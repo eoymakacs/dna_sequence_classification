@@ -1,0 +1,94 @@
+# 🧬 DNA Sequence Classification – Promoter Detection
+
+## Overview
+This project classifies DNA sequences as **promoter** or **non-promoter** using a **Convolutional Neural Network (CNN)**.  
+It demonstrates a bioinformatics application of deep learning for sequence-based classification, suitable for detecting gene regulatory regions.
+
+---
+
+## Dataset
+The dataset is the **Molecular Biology (Promoter Gene Sequences)** dataset from the **UCI Machine Learning Repository**.
+
+- **Source:** [UCI Promoter Dataset](https://archive.ics.uci.edu/ml/datasets/Molecular+Biology+(Promoter+Gene+Sequences))
+- **Samples:** 106 DNA sequences  
+- **Sequence Length:** 57 nucleotides each  
+- **Columns:**
+  - Label (`+` = promoter / `-` = non-promoter)  
+  - Sequence name (ignored in training)  
+  - DNA sequence  
+
+**Note:** The raw dataset file `promoters.data` should be placed in the `/data` folder. The script automatically converts it to `promoter_sequences.csv` for training.
+
+---
+
+## Project Structure
+```plaintext
+root/
+├── data/
+│ └── promoters.data # Raw UCI dataset
+├── src/
+│ └── model_training.py # Training and evaluation script
+└── README.md
+```
+
+
+---
+
+## Preprocessing
+- DNA sequences are **one-hot encoded**:
+  - `A` → `[1,0,0,0]`  
+  - `C` → `[0,1,0,0]`  
+  - `G` → `[0,0,1,0]`  
+  - `T` → `[0,0,0,1]`  
+- Labels are encoded as `positive` (promoter) or `negative` (non-promoter)  
+- Sequences with missing data are dropped  
+
+---
+
+## Model Architecture
+
+A simple **1D CNN** is used for sequence classification:
+
+- **Conv1D** layer: 64 filters, kernel size 3, ReLU  
+- **MaxPooling1D** layer: pool size 2  
+- **Dropout**: 0.2  
+- **Conv1D** layer: 128 filters, kernel size 3, ReLU  
+- **MaxPooling1D** layer: pool size 2  
+- **Flatten**  
+- **Dense** layer: 64 units, ReLU  
+- **Dense** output layer: 2 units, Softmax  
+
+- **Loss:** Categorical Crossentropy  
+- **Optimizer:** Adam  
+- **Metrics:** Accuracy  
+
+---
+
+## Training
+
+```bash
+cd src
+python model_training.py
+```
+
+- Batch size: 8
+- Epochs: 20
+- Validation split: 20%
+
+The script automatically:
+
+**1.** Checks for promoter_sequences.csv
+**2.** Converts promoters.data if CSV is missing
+**3.** Preprocesses sequences
+**4.** Trains the CNN
+**5.** Evaluates using accuracy, confusion matrix, and classification report
+
+---
+
+## Results
+- Expected Test Accuracy: ~85–95%
+- Evaluation Metrics: Accuracy, Precision, Recall, F1-score
+
+Visualization:
+  - Confusion Matrix
+  - Training / Validation Accuracy over epochs
